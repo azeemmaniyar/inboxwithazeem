@@ -6,7 +6,7 @@ export default function Footer() {
       <p>© {new Date().getFullYear()} {profile.name} · {profile.location}</p>
       <div className="flex gap-4">
         <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-fg">LinkedIn</a>
-        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-fg">GitHub</a>
+        <a href="https://github.com/azeemmaniyar" target="_blank" rel="noopener noreferrer" className="hover:text-fg">GitHub</a>
         <a href="#top" className="hover:text-fg">Back to top ↑</a>
       </div>
     </footer>
