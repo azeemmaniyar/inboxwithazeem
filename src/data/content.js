@@ -187,7 +187,7 @@ export const projects = [
     accent: 'violet',
     icon: '◈',
     // TODO: describe what the tool does and the problem it solves (keep it to 1–2 lines)
-    description: 'An internal tool I built to analyse campaign performance. Edit this line with what it does and who uses it.',
+    description: 'An internal tool I built to analyse campaign performance.The tool pulls data from multiple sources, visualizes core KPIs, and provides interactive filters so teams can quickly identify trends, measure ROI, and make data-driven decisions without manual reporting.',
     tags: ['Campaign analytics', 'Internal tool'],
     links: [{ label: 'See it on LinkedIn', href: 'https://www.linkedin.com/in/mohammad-azeem-maniyar-4022b820b' }], // TODO: link to the exact post
   },
