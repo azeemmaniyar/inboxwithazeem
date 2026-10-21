@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 250 248 255;
+  --surface: 255 255 255;
+  --fg: 20 16 46;
+  --muted: 82 78 110;
+  --line: 222 218 240;
+  color-scheme: light;
+}
+.dark {
+  --bg: 11 10 31;
+  --surface: 22 20 52;
+  --fg: 241 240 255;
+  --muted: 178 174 208;
+  --line: 52 48 92;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-bg text-fg font-sans antialiased; overflow-x: hidden; }
+  h1, h2, h3 { @apply font-display; }
+  section[id] { scroll-margin-top: 5rem; }
+  :focus-visible { outline: 3px solid #f472b6; outline-offset: 3px; border-radius: 8px; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+  .card { @apply rounded-3xl border border-line/80 bg-surface/80 backdrop-blur; }
+  .chip { @apply inline-flex items-center rounded-full border border-line px-3 py-1 text-sm font-medium; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition-colors; }
+  .btn-primary { @apply btn text-white; background: linear-gradient(110deg, #6d28d9, #be185d 55%, #c2410c); }
+  .btn-ghost { @apply btn border border-line bg-surface/70 text-fg hover:bg-surface; }
+}
+
+@layer utilities {
+  .accent-text { color: var(--a-solid); }
+  .dark .accent-text { color: var(--a-glow); }
+  .accent-bg { background-color: var(--a-solid); }
+  .accent-border { border-color: color-mix(in srgb, var(--a-glow) 55%, transparent); }
+  .accent-soft { background-color: color-mix(in srgb, var(--a-glow) 14%, transparent); }
+  .text-gradient {
+    background: linear-gradient(100deg, #7c3aed, #db2777, #ea580c, #7c3aed);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradient-pan 8s ease-in-out infinite;
+  }
+  .dark .text-gradient { background-image: linear-gradient(100deg, #a78bfa, #f472b6, #fbbf24, #a78bfa); }
+  .sr-only-focusable:not(:focus) { @apply sr-only; }
+}
+
+/* Animated gradient background blobs (pure CSS, GPU transforms only) */
+.blob { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: .45; will-change: transform; }
+.dark .blob { opacity: .35; }
+.blob-1 { width: 42vmax; height: 42vmax; background: #8b5cf6; top: -12vmax; left: -10vmax; animation: drift1 22s ease-in-out infinite alternate; }
+.blob-2 { width: 36vmax; height: 36vmax; background: #ec4899; top: 20vh; right: -14vmax; animation: drift2 26s ease-in-out infinite alternate; }
+.blob-3 { width: 30vmax; height: 30vmax; background: #f59e0b; bottom: -10vmax; left: 20vw; animation: drift3 30s ease-in-out infinite alternate; opacity: .25; }
+
+@keyframes drift1 { to { transform: translate(18vw, 14vh) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(-16vw, 22vh) scale(.9); } }
+@keyframes drift3 { to { transform: translate(-12vw, -18vh) scale(1.2); } }
+@keyframes gradient-pan { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* Infinite marquee */
+.marquee { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .blob, .text-gradient { animation: none !important; }
+  .marquee-track { animation-duration: 120s; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
